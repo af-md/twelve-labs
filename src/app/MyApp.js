@@ -40,8 +40,8 @@ function MyApp() {
         const message = `An error has occured: ${response.status}`;
         throw new Error(message);
       }
-
       setData(data);
+      console.log(data);
     };
 
     fetchData();
@@ -50,6 +50,7 @@ function MyApp() {
   // Render your component with the data you fetched
   return (
     <div>
+      <button type="button" onclick="alert('Hello world!')">Click Me!</button>
       {data && <div>{JSON.stringify(data)}</div>}
     </div>
   );
