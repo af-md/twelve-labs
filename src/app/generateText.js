@@ -23,7 +23,8 @@ export default async function getText(req, res) {
     });
     console.log("Responseeeeeeeeeeeee");
     console.log(completion.data.choices[0].text);
-    res.status(200).json({ result: completion.data.choices[0].text });
+    return completion.data.choices[0].text;
+    // res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {

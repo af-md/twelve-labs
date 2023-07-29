@@ -1,6 +1,7 @@
 /* @jsxImportSource react */
 "use client";
 import "./globals.css";
+import getText from "./generateText";
 
 import { useState } from "react";
 
@@ -13,6 +14,7 @@ const TextAreaWithButton = () => {
 
   const handleFormSubmit = () => {
     console.log("Text from the textarea:", inputText);
+    getText();
   };
 
   return (
