@@ -2,6 +2,7 @@
 "use client";
 import "./globals.css";
 import getText from "./generateText";
+import getAudio from "./generateAudio";
 
 import { useState } from "react";
 
@@ -12,9 +13,16 @@ const TextAreaWithButton = () => {
     setInputText(e.target.value);
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     console.log("Text from the textarea:", inputText);
     getText();
+    const audioData = await getAudio();
+    const audio = new Audio(audioData);
+
+    // Add event listener to check when audio is ready to play
+    audio.addEventListener("canplaythrough", () => {
+      audio.play();
+    });
   };
 
   return (

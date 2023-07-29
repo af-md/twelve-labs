@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "await": "^0.2.6",
     "@headlessui/react": "^1.7.16",
     "@heroicons/react": "^2.0.18",
+    "await": "^0.2.6",
+    "axios": "^1.4.0",
     "next": "13.4.12",
     "openai": "^3.3.0",
     "react": "18.2.0",
