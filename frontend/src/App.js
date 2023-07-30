@@ -8,12 +8,14 @@ import Typography from "@mui/material/Typography";
 import mp3File from "./audios/sound.mp3";
 import getText from "./generateText";
 import CircularProgress from "@mui/material/CircularProgress";
+import videoFile from "./videos/output.mp4";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [story, setStory] = useState("");
   const [audio, setAudio] = useState("");
   const [play] = useSound(mp3File);
+  const [videoGen, setVideoGen] = useState(false);
 
   const handleQueryChange = (e) => {
     console.log(e.target.value);
@@ -59,12 +61,20 @@ function App() {
         console.log("audio path: ", data);
         if (data) {
           setAudio(data);
+          const timeoutDuration = 5000; // 5000 milliseconds = 5 seconds
+          setTimeout(() => {
+            console.log("Timeout has elapsed. 5 seconds have passed!");
+            // Put your code here that you want to execute after the timeout
+            setLoading(false);
+            setVideoGen(true);
+          }, timeoutDuration);
+     
         }
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
-    setLoading(false);
   };
 
   const handleSubmit = (e) => {
@@ -89,28 +99,27 @@ function App() {
       <Typography variant="h5" component="h5">
         ElevenLabs Tutorial: Create stories with Voice AI from ElevenLabs
       </Typography>
-      <Box sx={{ marginTop: "32px", width: "600px" }}>
-        <Textarea
-          sx={{ width: "100%" }}
-          onChange={handleQueryChange}
-          minRows={2}
-          maxRows={4}
-          placeholder="Type anything…"
-        />
-        <Button sx={{ marginTop: "16px" }} onClick={handleSubmit}>
-          <Send />
-        </Button>
-      </Box>
+      {!videoGen && (
+        <Box sx={{ marginTop: "32px", width: "600px" }}>
+          <Textarea
+            sx={{ width: "100%" }}
+            onChange={handleQueryChange}
+            minRows={2}
+            maxRows={4}
+            placeholder="Type anything…"
+          />
+          <Button sx={{ marginTop: "16px" }} onClick={handleSubmit}>
+            <Send />
+          </Button>
+        </Box>
+      )}
       {loading && <CircularProgress sx={{ marginTop: "16px" }} />}
-      <Button
-        sx={{ marginTop: "16px" }}
-        onClick={() => {
-          play();
-          console.log(mp3File);
-        }}
-      >
-        <HeadphonesOutlined />
-      </Button>
+      {videoGen && (
+        <video width="640" height="360" controls autoplay>
+          <source src={videoFile} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
     </Box>
   );
 }

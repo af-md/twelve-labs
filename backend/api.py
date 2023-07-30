@@ -28,6 +28,25 @@ AUDIOS_CLIP = "../frontend/src/audios/sound.mp3"
 VIDEO_PATH  = "../frontend/src/videos/output.mp4"
 
 
+
+def combine_image_and_audio():
+    # Load the image
+    image_clip = ImageClip(IMAGE_PATH)
+    # Load the audio
+    audio_clip = AudioFileClip(AUDIOS_CLIP)
+    # Set the duration of the video clip to match the audio clip
+    image_clip = image_clip.set_duration(audio_clip.duration)
+    # Set the audio of the video clip
+    video_clip = image_clip.set_audio(audio_clip)
+    # Write the result to a file
+    video_clip.write_videofile(VIDEO_PATH, codec="libx264", fps=24)
+    # Close the clips
+    audio_clip.close()
+    video_clip.close()
+
+
+
+
 @app.get("/voice/{query}")
 async def voice_over(query: str):
     set_api_key("befd5e8a8b03e48ea562a90a0c9f9155")  # put your API key here
@@ -45,29 +64,15 @@ async def voice_over(query: str):
         with open(audio_path, 'wb') as f:
             f.write(audio)
 
+        combine_image_and_audio()
         return file_path
 
     except Exception as e:
         print(e)
-
+    
         return ""
-
-
-
-def combine_image_and_audio():
-    # Load the image
-    image_clip = ImageClip(IMAGE_PATH)
-    # Load the audio
-    audio_clip = AudioFileClip(AUDIOS_CLIP)
-    # Set the duration of the video clip to match the audio clip
-    image_clip = image_clip.set_duration(audio_clip.duration)
-    # Set the audio of the video clip
-    video_clip = image_clip.set_audio(audio_clip)
-    # Write the result to a file
-    video_clip.write_videofile(VIDEO_PATH, codec="libx264", fps=24)
-    # Close the clips
-    audio_clip.close()
-    video_clip.close()
+    
+   
 
 
 @app.get("/image/{query}")
