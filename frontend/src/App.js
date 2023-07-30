@@ -5,10 +5,12 @@ import Box from "@mui/joy/Box";
 import { Send, HeadphonesOutlined } from "@mui/icons-material/";
 import useSound from "use-sound";
 import Typography from "@mui/material/Typography";
-import mp3File from "./audios/this.mp3";
+import mp3File from "./audios/sound.mp3";
 import getText from "./generateText";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function App() {
+  const [loading, setLoading] = useState(false);
   const [story, setStory] = useState("");
   const [audio, setAudio] = useState("");
   const [play] = useSound(mp3File);
@@ -19,6 +21,7 @@ function App() {
   };
 
   const generateAudio = async () => {
+    setLoading(true);
     const text = await getText(story);
 
     console.log("audio about: ", text);
@@ -45,6 +48,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+    setLoading(false);
   };
 
   const handleSubmit = (e) => {
@@ -81,6 +85,7 @@ function App() {
           <Send />
         </Button>
       </Box>
+      {loading && <CircularProgress sx={{ marginTop: "16px" }} />}
       <Button
         sx={{ marginTop: "16px" }}
         onClick={() => {
