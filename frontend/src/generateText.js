@@ -6,7 +6,7 @@ const temperature = 0.7; // From 0 to 1
 const max_tokens = 2048;
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: "api-key",
   // apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
