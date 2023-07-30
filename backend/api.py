@@ -24,8 +24,8 @@ AUDIO_PATH = "/audios/"
 async def voice_over(query: str):
     set_api_key("befd5e8a8b03e48ea562a90a0c9f9155")  # put your API key here
 
-    audio_path = f'{AUDIOS_PATH}{query[:4]}.mp3'
-    file_path = f'{AUDIO_PATH}{query[:4]}.mp3'
+    audio_path = f'{AUDIOS_PATH}this.mp3'
+    file_path = f'{AUDIO_PATH}this.mp3'
 
     audio = generate(
         text=query,
