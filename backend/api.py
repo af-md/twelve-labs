@@ -49,7 +49,7 @@ def combine_image_and_audio():
 
 @app.get("/voice/{query}")
 async def voice_over(query: str):
-    set_api_key("befd5e8a8b03e48ea562a90a0c9f9155")  # put your API key here
+    set_api_key("API-KEY")  # put your API key here
 
     audio_path = f'{AUDIOS_PATH}sound.mp3'
     file_path = f'{AUDIO_PATH}sound.mp3'
@@ -85,7 +85,7 @@ async def imagegen(query: str):
         headers={
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": f"Bearer sk-Xg6MSxMXbrxDhKh9DAwpLyUAK7QH9qw903JUMgrRIIVZEbyY"
+            "Authorization": f"Bearer API-KEY"
         },
         json={
             "text_prompts": [
