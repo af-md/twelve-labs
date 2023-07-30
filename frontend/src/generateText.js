@@ -52,25 +52,5 @@ function getTextResult(input) {
 }
 
 function getTextPrompt(input) {
-  return `read the followings prompts for stable diffusion:
-
-  Bobby George Foreman grill adorned with jewellery. professional product shot, magazine ad
-  
-  a high quality product photo ad of klaus nomi with a technical reed rollerball pen exacto knife by junji ito, uni - ball ethereal eel
-  
-  a pair of 9 0 s style designer sunglasses, vaporwave, highly reflective, product photo, award winning ad, pink backdrop, high quality, isometric, stylish, avant - garde, fuji film, artistic, photo realistic, dramatic lighting, luxury,
-  
-  McDonalds branded VR headset, product photo, ad, 4k
-  
-  an ad for mutagenic cereal, 1 9 9 6, product photography, hq
-  
-  franch sauce new sauce burger king, hd, product ad, 4 k
-  
-  a pair of aeon flux style designer sunglasses, product photo, award winning ad, high quality, isometric, stylish, avant - garde, fuji film, artistic, photo realistic, dramatic lighting, luxury.
-  
-  generate a quick 5 second ads speech based on the structure above for a ${input}
-  
-  Only use the qualities of the product described above.
-
-  only give me the text that I should be saying`;
+  return `Generate a quick 50 words ads speech about ${input}. Only use the qualities of the product described above. Only give me the text that I should be saying. Don't add emoji.`;
 }
