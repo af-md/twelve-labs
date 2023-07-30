@@ -20,8 +20,24 @@ function App() {
     setStory(e.target.value);
   };
 
+  const generateImage = async () => {
+    fetch(`http://127.0.0.1:8000/image/water`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const generateAudio = async () => {
     setLoading(true);
+    const image = await generateImage();
     const text = await getText(story);
 
     console.log("audio about: ", text);
