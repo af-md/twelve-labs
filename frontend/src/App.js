@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import Textarea from "@mui/joy/Textarea";
 import Button from "@mui/joy/Button";
 import Box from "@mui/joy/Box";
-import { Send, HeadphonesOutlined } from "@mui/icons-material/";
-import useSound from "use-sound";
+import { Send } from "@mui/icons-material/";
 import Typography from "@mui/material/Typography";
-import mp3File from "./audios/sound.mp3";
 import getText from "./generateText";
 import CircularProgress from "@mui/material/CircularProgress";
 import videoFile from "./videos/output.mp4";
@@ -13,12 +11,9 @@ import videoFile from "./videos/output.mp4";
 function App() {
   const [loading, setLoading] = useState(false);
   const [story, setStory] = useState("");
-  const [audio, setAudio] = useState("");
-  const [play] = useSound(mp3File);
   const [videoGen, setVideoGen] = useState(false);
 
   const handleQueryChange = (e) => {
-    console.log(e.target.value);
     setStory(e.target.value);
   };
 
@@ -60,7 +55,6 @@ function App() {
       .then((data) => {
         console.log("audio path: ", data);
         if (data) {
-          setAudio(data);
           const timeoutDuration = 5000; // 5000 milliseconds = 5 seconds
           setTimeout(() => {
             console.log("Timeout has elapsed. 5 seconds have passed!");
@@ -68,7 +62,6 @@ function App() {
             setLoading(false);
             setVideoGen(true);
           }, timeoutDuration);
-     
         }
       })
       .catch((err) => {
@@ -94,6 +87,7 @@ function App() {
         justifyContent: "center",
         textAlign: "center",
         minHeight: "100vh",
+        backgroundColor: "pink",
       }}
     >
       <Typography variant="h5" component="h5">
