@@ -3,7 +3,7 @@ import { Configuration, OpenAIApi } from "openai";
 
 const model = "gpt-3.5-turbo"; // models can be found at: https://platform.openai.com/docs/models
 const temperature = 0.7; // From 0 to 1
-const max_tokens = 1000;
+const max_tokens = 30;
 
 const configuration = new Configuration({
   apiKey: "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",
