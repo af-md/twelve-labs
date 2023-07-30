@@ -95,11 +95,6 @@ function App() {
       >
         <HeadphonesOutlined />
       </Button>
-      {story && (
-        <Box sx={{ marginTop: "32px", width: "600px" }}>
-          <Textarea sx={{ width: "100%" }} value={story} />
-        </Box>
-      )}
     </Box>
   );
 }
