@@ -21,7 +21,7 @@ function App() {
   };
 
   const generateImage = async () => {
-    fetch(`http://127.0.0.1:8000/image/water`, {
+    fetch(`http://127.0.0.1:8000/image/${story}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
