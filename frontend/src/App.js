@@ -6,6 +6,7 @@ import { Send, HeadphonesOutlined } from "@mui/icons-material/";
 import useSound from "use-sound";
 import Typography from "@mui/material/Typography";
 import mp3File from "./audios/this.mp3";
+import getText from "./generateText";
 
 function App() {
   const [story, setStory] = useState("");
@@ -17,10 +18,12 @@ function App() {
     setStory(e.target.value);
   };
 
-  const generateAudio = () => {
-    console.log("audio about: ", story);
+  const generateAudio = async () => {
+    const text = await getText(story);
 
-    fetch(`http://127.0.0.1:8000/voice/${story}`, {
+    console.log("audio about: ", text);
+
+    fetch(`http://127.0.0.1:8000/voice/${text}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
