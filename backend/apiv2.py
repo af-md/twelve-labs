@@ -8,7 +8,6 @@ import requests
 from moviepy.editor import ImageClip, AudioFileClip
 import requests # double check
 
-
 app = FastAPI()
 
 origins = ['http://localhost:3000/']  # put your frontend url here
@@ -20,13 +19,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 AUDIOS_PATH = "../frontend/src/audios/"
 AUDIO_PATH = "/audios/"
 IMAGE_PATH = "../backend/out/v1_txt2img_0.png"
 AUDIOS_CLIP = "../frontend/src/audios/sound.mp3"
-VIDEO_PATH  = "../frontend/src/videos/output.mp4"
+VIDEO_PATH  = "../frontend/src/videos"
 
+def combine_image_and_audio():
+    # Load the image
+    image_clip = ImageClip(IMAGE_PATH)
+    # Load the audio
+    audio_clip = AudioFileClip(AUDIOS_CLIP)
+    # Set the duration of the video clip to match the audio clip
+    image_clip = image_clip.set_duration(audio_clip.duration)
+    # Set the audio of the video clip
+    video_clip = image_clip.set_audio(audio_clip)
+    # Write the result to a file
+    video_clip.write_videofile(VIDEO_PATH, codec="libx264")
+    # Close the clips
+    audio_clip.close()
+    video_clip.close()
 
 @app.get("/voice/{query}")
 async def voice_over(query: str):
@@ -51,23 +63,6 @@ async def voice_over(query: str):
         print(e)
 
         return ""
-
-
-
-def combine_image_and_audio():
-    # Load the image
-    image_clip = ImageClip(IMAGE_PATH)
-    # Load the audio
-    audio_clip = AudioFileClip(AUDIOS_CLIP)
-    # Set the duration of the video clip to match the audio clip
-    image_clip = image_clip.set_duration(audio_clip.duration)
-    # Set the audio of the video clip
-    video_clip = image_clip.set_audio(audio_clip)
-    # Write the result to a file
-    video_clip.write_videofile(VIDEO_PATH, codec="libx264", fps=24)
-    # Close the clips
-    audio_clip.close()
-    video_clip.close()
 
 
 @app.get("/image/{query}")
@@ -104,7 +99,6 @@ async def imagegen(query: str):
     for i, image in enumerate(data["artifacts"]):
         with open(f"./out/v1_txt2img_{i}.png", "wb") as f:
             f.write(base64.b64decode(image["base64"]))
-
-    combine_image_and_audio()
     
+    combine_image_and_audio()
     return "done"
